@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CopyProjectFiles.Desktop.ViewModels"
+        xmlns:views="using:CopyProjectFiles.Desktop.Views"
+        x:Class="CopyProjectFiles.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="CopyProjectFiles"
+        Width="1080" Height="740" MinWidth="800" MinHeight="540"
+        WindowStartupLocation="CenterScreen">
+
+  <Grid ColumnDefinitions="300,*">
+
+    <!-- ===== Left: project list ===== -->
+    <Border Grid.Column="0" Classes="sidebar">
+      <DockPanel Margin="16">
+
+        <StackPanel DockPanel.Dock="Top" Spacing="2" Margin="0,0,0,12">
+          <TextBlock Classes="title" Text="CopyProjectFiles" />
+          <TextBlock Classes="muted" Text="Saved project copies" />
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="0,12,0,0">
+          <Border Classes="confirm" IsVisible="{Binding IsConfirmingDelete}">
+            <StackPanel Spacing="10">
+              <TextBlock Text="{Binding DeletePrompt}" TextWrapping="Wrap" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Classes="danger" Content="Delete" Command="{Binding ConfirmDeleteCommand}" />
+                <Button Content="Cancel" Command="{Binding CancelDeleteCommand}" />
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <Grid ColumnDefinitions="*,8,*">
+            <Button Grid.Column="0" Classes="accent" Content="New"
+                    Command="{Binding NewCommand}"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+            <Button Grid.Column="2" Content="Delete"
+                    Command="{Binding DeleteCommand}"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+          </Grid>
+
+          <TextBlock Classes="error" Text="{Binding ErrorMessage}"
+                     IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+        </StackPanel>
+
+        <ListBox ItemsSource="{Binding Projects}"
+                 SelectedItem="{Binding SelectedProject}"
+                 Background="Transparent">
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:ProjectEditorViewModel">
+              <StackPanel Spacing="2" Margin="0,2">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" />
+                  <TextBlock Text="●" Foreground="#3B82F6" FontSize="10" VerticalAlignment="Center"
+                             IsVisible="{Binding HasUnsavedChanges}"
+                             ToolTip.Tip="Unsaved changes" />
+                </StackPanel>
+                <TextBlock Text="{Binding SourcePath}" FontSize="12" Opacity="0.6"
+                           TextTrimming="CharacterEllipsis" />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+      </DockPanel>
+    </Border>
+
+    <!-- ===== Right: editor for the selected project ===== -->
+    <Panel Grid.Column="1">
+      <TextBlock Classes="muted"
+                 Text="Select a project on the left, or click New."
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 IsVisible="{Binding !HasSelection}" />
+
+      <ContentControl Content="{Binding SelectedProject}">
+        <ContentControl.ContentTemplate>
+          <DataTemplate x:DataType="vm:ProjectEditorViewModel">
+            <views:ProjectEditorView />
+          </DataTemplate>
+        </ContentControl.ContentTemplate>
+      </ContentControl>
+    </Panel>
+
+  </Grid>
+</Window>

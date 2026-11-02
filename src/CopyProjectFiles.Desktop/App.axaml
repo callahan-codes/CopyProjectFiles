@@ -1,0 +1,77 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CopyProjectFiles.Desktop.App"
+             RequestedThemeVariant="Default">
+
+  <!-- Colors are semi-transparent so they work in both light and dark mode -->
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="TextBlock.title">
+      <Setter Property="FontSize" Value="20" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.section">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.label">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Opacity" Value="0.75" />
+    </Style>
+    <Style Selector="TextBlock.muted">
+      <Setter Property="Opacity" Value="0.6" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="TextBlock.error">
+      <Setter Property="Foreground" Value="#E5484D" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style Selector="Border.sidebar">
+      <Setter Property="Background" Value="#0D808080" />
+      <Setter Property="BorderBrush" Value="#26808080" />
+      <Setter Property="BorderThickness" Value="0,0,1,0" />
+    </Style>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="#0A808080" />
+      <Setter Property="BorderBrush" Value="#26808080" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
+    <Style Selector="Border.status">
+      <Setter Property="Background" Value="#1F3B82F6" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="12,8" />
+    </Style>
+    <Style Selector="Border.status.error">
+      <Setter Property="Background" Value="#26E5484D" />
+    </Style>
+    <Style Selector="Border.confirm">
+      <Setter Property="Background" Value="#1FE5484D" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="12" />
+    </Style>
+
+    <Style Selector="Border.tree">
+      <Setter Property="BorderBrush" Value="#26808080" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="4" />
+    </Style>
+    <Style Selector="TextBlock.folder">
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.ignored">
+      <Setter Property="Opacity" Value="0.45" />
+      <Setter Property="TextDecorations" Value="Strikethrough" />
+    </Style>
+
+    <Style Selector="Button.danger">
+      <Setter Property="Background" Value="#E5484D" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+  </Application.Styles>
+</Application>
